@@ -2,29 +2,16 @@
   <div id="app">
     <h1>{{ count }}</h1>
     <h1>{{ double }}</h1>
-    <ul>
-      <li v-for="number in numbers" :key="number">
-        <h1>{{ number }}</h1>
-      </li>
-    </ul>
-    <h1>{{ person.name }}</h1>
+    <h1>{{ greetings }}</h1>
+    <h1>X:{{ x }},Y:{{ y }}</h1>
     <button @click="increase">+1</button>
     <button @click="updateGreetings">Update Title</button>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  ref,
-  computed,
-  reactive,
-  toRefs,
-  onMounted,
-  onUpdated,
-  onRenderTriggered,
-  watch
-} from "vue";
-
+import { ref, computed, reactive, toRefs, watch } from "vue";
+import useMousePosition from "@/hooks/useMousePosition";
 // 定义接口   定义data的类型 DataProps
 interface DataProps {
   count: number;
@@ -36,24 +23,6 @@ interface DataProps {
 export default {
   name: "App",
   setup() {
-    // const count = ref(0);
-    // const double = computed(() => {
-    //   return count.value * 2;
-    // });
-    // const increase = () => {
-    //   count.value++;
-    // };
-
-    onMounted(() => {
-      console.log("mounted");
-    });
-    onUpdated(() => {
-      console.log("updated");
-    });
-    onRenderTriggered(event => {
-      console.log(event);
-    });
-
     const data: DataProps = reactive({
       count: 0,
       increase: () => {
@@ -67,6 +36,7 @@ export default {
     data.numbers[0] = 5;
     data.person.name = "ReginYuan";
 
+    const { x, y } = useMousePosition();
     const greetings = ref("");
     const updateGreetings = () => {
       greetings.value += "hello!";
@@ -82,7 +52,9 @@ export default {
       //...展开refData
       ...refData,
       greetings,
-      updateGreetings
+      updateGreetings,
+      x,
+      y
     };
   }
 };
