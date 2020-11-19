@@ -9,6 +9,7 @@
     </ul>
     <h1>{{ person.name }}</h1>
     <button @click="increase">+1</button>
+    <button @click="updateGreetings">Update Title</button>
   </div>
 </template>
 
@@ -70,13 +71,18 @@ export default {
     const updateGreetings = () => {
       greetings.value += "hello!";
     };
-    document.title = "updated" + greetings.value;
 
+    watch([greetings, () => data.count], (newValue, oldValue) => {
+      console.log(newValue, oldValue);
+      document.title = "updated" + greetings.value + data.count;
+    });
     // toRefs将普通的对象转换成响应式对象
     const refData = toRefs(data);
     return {
       //...展开refData
-      ...refData
+      ...refData,
+      greetings,
+      updateGreetings
     };
   }
 };
