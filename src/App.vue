@@ -20,7 +20,8 @@ import {
   toRefs,
   onMounted,
   onUpdated,
-  onRenderTriggered
+  onRenderTriggered,
+  watch
 } from "vue";
 
 // 定义接口   定义data的类型 DataProps
@@ -64,6 +65,13 @@ export default {
 
     data.numbers[0] = 5;
     data.person.name = "ReginYuan";
+
+    const greetings = ref("");
+    const updateGreetings = () => {
+      greetings.value += "hello!";
+    };
+    document.title = "updated" + greetings.value;
+
     // toRefs将普通的对象转换成响应式对象
     const refData = toRefs(data);
     return {
