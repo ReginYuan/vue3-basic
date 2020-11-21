@@ -3,6 +3,8 @@
     <h1>{{ count }}</h1>
     <h1>{{ double }}</h1>
     <h1>{{ greetings }}</h1>
+    <h1 v-if="loading">loading!...</h1>
+    <img v-if="loaded" :src="result.message" />
     <h1>X:{{ x }},Y:{{ y }}</h1>
     <button @click="increase">+1</button>
     <button @click="updateGreetings">Update Title</button>
@@ -12,6 +14,8 @@
 <script lang="ts">
 import { ref, computed, reactive, toRefs, watch } from "vue";
 import useMousePosition from "@/hooks/useMousePosition";
+import useURLLoader from "@/hooks/useURLLoader";
+
 // 定义接口   定义data的类型 DataProps
 interface DataProps {
   count: number;
@@ -37,6 +41,9 @@ export default {
     data.person.name = "ReginYuan";
 
     const { x, y } = useMousePosition();
+    const { result, loading, loaded } = useURLLoader(
+      "https://dog.ceo/api/breeds/image/random"
+    );
     const greetings = ref("");
     const updateGreetings = () => {
       greetings.value += "hello!";
@@ -54,7 +61,10 @@ export default {
       greetings,
       updateGreetings,
       x,
-      y
+      y,
+      result,
+      loading,
+      loaded
     };
   }
 };
