@@ -2,9 +2,10 @@ import  {ref} from 'vue'
 import  axios  from   'axios'
 
 // 添加一个参数作为要使用的 地址
-function useURLLoader(url: string) {
+// 为函数添加泛型
+function useURLLoader<T>(url: string) {
   // 声明几个ref，代表不同的状态和结果
-  const result = ref(null)
+  const result = ref<T|null>(null)
   const loading = ref(true)
   const loaded = ref(false)
   const error = ref(null)
