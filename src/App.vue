@@ -41,6 +41,7 @@ export default {
     data.person.name = "ReginYuan";
 
     const { x, y } = useMousePosition();
+    // 使用 urlLoader 展示狗狗图片
     const { result, loading, loaded } = useURLLoader(
       "https://dog.ceo/api/breeds/image/random"
     );
