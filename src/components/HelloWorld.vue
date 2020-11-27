@@ -14,7 +14,7 @@ const component = defineComponent({
     }
   },
   setup(props, context) {
-    console.log();
+    console.log(props, context);
   }
 });
 

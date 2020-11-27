@@ -6,6 +6,7 @@
     <h1 v-if="loading">loading!...</h1>
     <img v-if="loaded" :src="result[0].url" />
     <h1>X:{{ x }},Y:{{ y }}</h1>
+    <modal></modal>
     <button @click="increase">+1</button>
     <button @click="updateGreetings">Update Title</button>
   </div>
