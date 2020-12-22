@@ -15,11 +15,11 @@ export default defineComponent({
   props: {
     isOpen: Boolean
   },
-  emits: {
-    "close-modal": null
-  },
+  // 事件的名称
+  emits: ["close-modal", "closeModal"],
   setup(props, context) {
     const buttonClick = () => {
+      // 发送事件
       context.emit("close-modal");
     };
     return {
